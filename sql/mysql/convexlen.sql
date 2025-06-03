@@ -93,6 +93,22 @@ CREATE TABLE `sale_item`  (
   INDEX `idx_unique`(`store_id` , `eid`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 0 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '商品';
 
+DROP TABLE IF EXISTS `item_grab`;
+CREATE TABLE `item_grab`  (
+                              `eid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '商品电商ID',
+                              `grab_date` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '采集日期',
+                              `grab_hour` tinyint  NULL COMMENT '采集时点',
+                              `grab_minute` tinyint NULL COMMENT '采集分钟',
+                              `title` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL  COMMENT '商品标题',
+                              `custom` bigint  NULL DEFAULT 0 COMMENT '访客数',
+                              `buy` bigint  NULL DEFAULT 0 COMMENT '支付买家数',
+                              `collect` bigint  NULL DEFAULT 0 COMMENT '商品收藏人数',
+                              `car` bigint  NULL DEFAULT 0 COMMENT '加购人数',
+                              `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+                              UNIQUE `idx_unique`(`eid`,`grab_date`,`grab_hour`,`grab_minute`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '商品采集';
+
+
 DROP TABLE IF EXISTS `tenant_uper`;
 CREATE TABLE `tenant_uper`  (
 	`id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键',
