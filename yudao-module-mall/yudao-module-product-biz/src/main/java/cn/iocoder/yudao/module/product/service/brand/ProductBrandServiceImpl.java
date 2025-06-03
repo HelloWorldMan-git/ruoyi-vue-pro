@@ -30,7 +30,7 @@ import static cn.iocoder.yudao.module.product.enums.ErrorCodeConstants.*;
 public class ProductBrandServiceImpl implements ProductBrandService {
 
     @Resource
-    private ProductBrandMapper brandMapper;
+    private ProductBrandMapper productBrandMapper;
 
     @Override
     public Long createBrand(ProductBrandCreateReqVO createReqVO) {
@@ -39,7 +39,7 @@ public class ProductBrandServiceImpl implements ProductBrandService {
 
         // 插入
         ProductBrandDO brand = ProductBrandConvert.INSTANCE.convert(createReqVO);
-        brandMapper.insert(brand);
+        productBrandMapper.insert(brand);
         // 返回
         return brand.getId();
     }
@@ -51,7 +51,7 @@ public class ProductBrandServiceImpl implements ProductBrandService {
         validateBrandNameUnique(updateReqVO.getId(), updateReqVO.getName());
         // 更新
         ProductBrandDO updateObj = ProductBrandConvert.INSTANCE.convert(updateReqVO);
-        brandMapper.updateById(updateObj);
+        productBrandMapper.updateById(updateObj);
     }
 
     @Override
@@ -59,18 +59,18 @@ public class ProductBrandServiceImpl implements ProductBrandService {
         // 校验存在
         validateBrandExists(id);
         // 删除
-        brandMapper.deleteById(id);
+        productBrandMapper.deleteById(id);
     }
 
     private void validateBrandExists(Long id) {
-        if (brandMapper.selectById(id) == null) {
+        if (productBrandMapper.selectById(id) == null) {
             throw exception(BRAND_NOT_EXISTS);
         }
     }
 
     @VisibleForTesting
     public void validateBrandNameUnique(Long id, String name) {
-        ProductBrandDO brand = brandMapper.selectByName(name);
+        ProductBrandDO brand = productBrandMapper.selectByName(name);
         if (brand == null) {
             return;
         }
@@ -85,22 +85,22 @@ public class ProductBrandServiceImpl implements ProductBrandService {
 
     @Override
     public ProductBrandDO getBrand(Long id) {
-        return brandMapper.selectById(id);
+        return productBrandMapper.selectById(id);
     }
 
     @Override
     public List<ProductBrandDO> getBrandList(Collection<Long> ids) {
-        return brandMapper.selectBatchIds(ids);
+        return productBrandMapper.selectBatchIds(ids);
     }
 
     @Override
     public List<ProductBrandDO> getBrandList(ProductBrandListReqVO listReqVO) {
-        return brandMapper.selectList(listReqVO);
+        return productBrandMapper.selectList(listReqVO);
     }
 
     @Override
     public void validateProductBrand(Long id) {
-        ProductBrandDO brand = brandMapper.selectById(id);
+        ProductBrandDO brand = productBrandMapper.selectById(id);
         if (brand == null) {
             throw exception(BRAND_NOT_EXISTS);
         }
@@ -111,12 +111,12 @@ public class ProductBrandServiceImpl implements ProductBrandService {
 
     @Override
     public PageResult<ProductBrandDO> getBrandPage(ProductBrandPageReqVO pageReqVO) {
-        return brandMapper.selectPage(pageReqVO);
+        return productBrandMapper.selectPage(pageReqVO);
     }
 
     @Override
     public List<ProductBrandDO> getBrandListByStatus(Integer status) {
-        return brandMapper.selectListByStatus(status);
+        return productBrandMapper.selectListByStatus(status);
     }
 
 }

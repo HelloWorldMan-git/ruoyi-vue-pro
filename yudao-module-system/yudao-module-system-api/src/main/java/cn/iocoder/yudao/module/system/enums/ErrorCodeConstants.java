@@ -165,4 +165,9 @@ public interface ErrorCodeConstants {
     // ========== 站内信发送 1-002-028-000 ==========
     ErrorCode NOTIFY_SEND_TEMPLATE_PARAM_MISS = new ErrorCode(1_002_028_000, "模板参数({})缺失");
 
+    // ========== 品牌模块 1-002-029-000 ==========
+    ErrorCode BRAND_NOT_EXISTS = new ErrorCode(1_002_029_000, "品牌不存在");
+    ErrorCode BRAND_USER_NOT_EXISTS = new ErrorCode(1_002_029_001, "品牌参与者不存在");
+    ErrorCode BRAND_USER_IS_EXISTS = new ErrorCode(1_002_029_002, "此参与者已经是该品牌的{}");
+
 }
