@@ -108,6 +108,19 @@ CREATE TABLE `item_grab`  (
                               UNIQUE `idx_unique`(`eid`,`grab_date`,`grab_hour`,`grab_minute`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '商品采集';
 
+DROP TABLE IF EXISTS `item_search_grab`;
+CREATE TABLE `item_search_grab`  (
+                              `eid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '商品电商ID',
+                              `grab_date` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '采集日期',
+                              `grab_hour` tinyint  NULL COMMENT '采集时点',
+                              `grab_minute` tinyint NULL COMMENT '采集分钟',
+                              `words` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL  COMMENT '搜索词',
+                              `custom` bigint  NULL DEFAULT 0 COMMENT '访客数',
+                              `buy` bigint  NULL DEFAULT 0 COMMENT '支付买家数',
+                              `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+                              UNIQUE `idx_unique`(`eid`,`grab_date`,`grab_hour`,`grab_minute`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '商品采集';
+
 
 DROP TABLE IF EXISTS `tenant_uper`;
 CREATE TABLE `tenant_uper`  (
